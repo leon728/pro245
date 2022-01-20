@@ -1,0 +1,11 @@
+<layout id="WatchFace">
+    <!-- <label id="AmLabel" text="A" x="225" y="93" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+    <!-- <label id="PmLabel" text="P" x="225" y="127" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+
+    <!-- <label id="TimeLabel" text="05:30" x="center" y="70" font="Graphics.FONT_NUMBER_THAI_HOT" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+    <!-- <label id="TimeLabel" text="05:30" x="-50" y="70" font="@Fonts.bebas" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+
+    <!-- <label id="DateLabel" text="1/15 Sat" x="center" y="165" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+    <!-- <label id="NotifyLabel" text="00" x="center" y="15" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+    <!-- <label id="BatteryLabel" text="87%" x="center" y="52" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" /> -->
+</layout>
