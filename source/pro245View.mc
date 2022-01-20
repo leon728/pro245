@@ -9,11 +9,6 @@ using Toybox.ActivityMonitor;
 class pro245View extends WatchUi.WatchFace {
     const arrWeek = ["", "日", "一", "二", "三", "四", "五", "六"];
     var timeFont;
-    var force_update;
-    var update_counter;
-    // var phoneConnected;
-    // var notificationCount;
-
     var datetime;
     var settings;
     var stats;
@@ -32,33 +27,14 @@ class pro245View extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        force_update = true;
-        update_counter = 99;
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        // var settings = System.getDeviceSettings();
-        update_counter ++;
-        if(!(  force_update
-               || update_counter >= 60
-            // || System.getClockTime().sec == 0
-            // || phoneConnected != settings.phoneConnected
-            // || notificationCount != settings.notificationCount
-            )) {
-            return;
-        }
         // System.println("go");
-
-        force_update = false;
-        // update_counter = 0;
-        // phoneConnected = settings.phoneConnected;
-        // notificationCount = settings.notificationCount;
-
+        datetime = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         settings = System.getDeviceSettings();
         stats = System.getSystemStats();
-        datetime = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        update_counter = datetime.sec;
 
         // setTimeLabel();
         // setDateLabel();
