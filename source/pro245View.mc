@@ -62,7 +62,9 @@ class pro245View extends WatchUi.WatchFace {
         // dc.fillRoundedRectangle(5, 79, 230, 81, 10);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText(xcenter, ycenter-75, timeFont, setTimeLabel(), Graphics.TEXT_JUSTIFY_CENTER); // noto:(xcenter,45), bebas:(xcenter,52)
-        dc.drawText(xcenter, ycenter-106, Graphics.FONT_SMALL, setNotifyLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xcenter, ycenter-107, Graphics.FONT_SMALL, setNotifyLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+        // dc.drawText(xcenter, ycenter+79, Graphics.FONT_SMALL, ActivityMonitor.getInfo().steps, Graphics.TEXT_JUSTIFY_CENTER);
+        // dc.drawText(xcenter+87, ycenter+47, Graphics.FONT_SMALL, datetime.sec, Graphics.TEXT_JUSTIFY_CENTER);
         // dc.setPenWidth(3);
         // dc.drawLine(0, 75, width, 75);
         // dc.drawLine(0, 165, width, 165);
@@ -73,8 +75,8 @@ class pro245View extends WatchUi.WatchFace {
         // dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
         // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
         dc.setColor(0x00ffff, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(xcenter, ycenter+50, Graphics.FONT_SMALL, setDateLabel(), Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(xcenter, ycenter-74, Graphics.FONT_SMALL, setBatteryLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xcenter, ycenter-75, Graphics.FONT_SMALL, setBatteryLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xcenter, ycenter+47, Graphics.FONT_SMALL, setDateLabel(), Graphics.TEXT_JUSTIFY_CENTER);
 
         // var info = ActivityMonitor.getInfo();
         // dc.drawText(60, 45, Graphics.FONT_SMALL, info.steps, Graphics.TEXT_JUSTIFY_CENTER);
