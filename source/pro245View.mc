@@ -12,6 +12,7 @@ class pro245View extends WatchUi.WatchFace {
     var datetime;
     var settings;
     var stats;
+    var force_update;
 
     function initialize() {
         WatchFace.initialize();
@@ -27,12 +28,21 @@ class pro245View extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
+        force_update = true;
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
+        var now = Time.now();
+        if(!(  force_update
+               || now.value()%60 == 0
+            )) {
+            return;
+        }
+        force_update = false;
+
         // System.println("go");
-        datetime = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        datetime = Gregorian.info(now, Time.FORMAT_SHORT);
         settings = System.getDeviceSettings();
         stats = System.getSystemStats();
 
@@ -76,7 +86,7 @@ class pro245View extends WatchUi.WatchFace {
         // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
         dc.setColor(0x00ffff, Graphics.COLOR_TRANSPARENT);
         dc.drawText(xcenter, ycenter-75, Graphics.FONT_SMALL, setBatteryLabel(), Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(xcenter, ycenter+47, Graphics.FONT_SMALL, setDateLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xcenter, ycenter+52, Graphics.FONT_SMALL, setDateLabel(), Graphics.TEXT_JUSTIFY_CENTER);
 
         // var info = ActivityMonitor.getInfo();
         // dc.drawText(60, 45, Graphics.FONT_SMALL, info.steps, Graphics.TEXT_JUSTIFY_CENTER);
