@@ -14,6 +14,10 @@ class pro245View extends WatchUi.WatchFace {
     // var phoneConnected;
     // var notificationCount;
 
+    var datetime;
+    var settings;
+    var stats;
+
     function initialize() {
         WatchFace.initialize();
         timeFont = WatchUi.loadResource(Rez.Fonts.timeFont);
@@ -44,11 +48,17 @@ class pro245View extends WatchUi.WatchFace {
             )) {
             return;
         }
+        // System.println("go");
+
         force_update = false;
-        update_counter = 0;
+        // update_counter = 0;
         // phoneConnected = settings.phoneConnected;
         // notificationCount = settings.notificationCount;
-        // System.println("go");
+
+        settings = System.getDeviceSettings();
+        stats = System.getSystemStats();
+        datetime = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        update_counter = datetime.sec;
 
         // setTimeLabel();
         // setDateLabel();
@@ -96,9 +106,11 @@ class pro245View extends WatchUi.WatchFace {
     }
 
     function setTimeLabel() {
-        var clockTime = System.getClockTime();
-        var hour = clockTime.hour;
-        var min = clockTime.min;
+        // var clockTime = System.getClockTime();
+        // var hour = clockTime.hour;
+        // var min = clockTime.min;
+        var hour = datetime.hour;
+        var min = datetime.min;
 
         // var amLabel = View.findDrawableById("AmLabel");
         // var pmLabel = View.findDrawableById("PmLabel");
@@ -111,7 +123,7 @@ class pro245View extends WatchUi.WatchFace {
         //     pmLabel.setText("P");
         // }
 
-        if(!System.getDeviceSettings().is24Hour) {
+        if(!settings.is24Hour) {
             // (12, 1, 2, ..., 11), (12, 1, 2, ... 11)
             // hour %= 12;
             // if(hour == 0) {
@@ -123,7 +135,6 @@ class pro245View extends WatchUi.WatchFace {
                 hour -= 12;
             }
         }
-        // var str = Lang.format("$1$:$2$.$3$", [hour.format("%02d"), min.format("%02d"), clockTime.sec.format("%02d")]);
         // var str = Lang.format("$1$:$2$", [hour.format("%02d"), min.format("%02d")]);
         var str = hour.format("%02d") +":"+ min.format("%02d");
         // View.findDrawableById("TimeLabel").setText(str);
@@ -131,23 +142,19 @@ class pro245View extends WatchUi.WatchFace {
     }
 
     function setDateLabel() {
-        var date = Gregorian.info(Time.today(), Time.FORMAT_SHORT);
-        // var str = Lang.format("$1$/$2$ 週$3$", [date.month, date.day, arrWeek[date.day_of_week]]);
-        var str = date.month +"/"+ date.day +" 週"+ arrWeek[date.day_of_week];
+        // var datetime = Gregorian.info(Time.today(), Time.FORMAT_SHORT);
+        var str = datetime.month +"/"+ datetime.day +" 週"+ arrWeek[datetime.day_of_week];
         // View.findDrawableById("DateLabel").setText(str);
         return str;
     }
 
     function setBatteryLabel() {
-        var battery = System.getSystemStats().battery;
-        var str = "  " + battery.format("%d") + "%";
-        // var str = battery.format("%.1f") + "%";
+        var str = "  " + stats.battery.format("%d") + "%";
         // View.findDrawableById("BatteryLabel").setText(str);
         return str;
     }
 
     function setNotifyLabel() {
-        var settings = System.getDeviceSettings();
         var str;
         if(settings.phoneConnected) {
             var notifyCount = settings.notificationCount;
