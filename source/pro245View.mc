@@ -12,7 +12,7 @@ class pro245View extends WatchUi.WatchFace {
     var datetime;
     var settings;
     var stats;
-    var force_update;
+    var first_update = true;
 
     function initialize() {
         WatchFace.initialize();
@@ -28,18 +28,15 @@ class pro245View extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        force_update = true;
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
         var now = Time.now();
-        if(!(  force_update
-               || now.value()%60 == 0
-            )) {
+        if(!(first_update || now.value()%60 == 0)) {
             return;
         }
-        force_update = false;
+        first_update = false;
 
         // System.println("go");
         datetime = Gregorian.info(now, Time.FORMAT_SHORT);
