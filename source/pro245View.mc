@@ -7,12 +7,16 @@ import Toybox.Time.Gregorian;
 using Toybox.ActivityMonitor;
 
 class pro245View extends WatchUi.WatchFace {
-    const arrWeek = ["", "日", "一", "二", "三", "四", "五", "六"];
+    const arrWeek = ["", "週日", "週一", "週二", "週三", "週四", "週五", "週六"];
     var timeFont;
     var datetime;
     var settings;
     var stats;
     var first_update = true;
+    var swidth = System.getDeviceSettings().screenWidth;
+    var sheight = System.getDeviceSettings().screenHeight;
+    var xcenter = swidth / 2;
+    var ycenter = sheight / 2;
 
     function initialize() {
         WatchFace.initialize();
@@ -57,13 +61,13 @@ class pro245View extends WatchUi.WatchFace {
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
         dc.clear();
 
-        var width = dc.getWidth();
-        var height = dc.getHeight();
-        var xcenter = width/2;
-        var ycenter = height/2;
+        // var swidth = dc.getWidth();
+        // var sheight = dc.getHeight();
+        // var xcenter = width/2;
+        // var ycenter = height/2;
 
-        // dc.drawLine(0, ycenter, width, ycenter); // ---
-        // dc.drawLine(xcenter, 0, xcenter, height); //  |
+        // dc.drawLine(0, ycenter, swidth, ycenter); // ---
+        // dc.drawLine(xcenter, 0, xcenter, sheight); //  |
 
         // dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
         // dc.fillRoundedRectangle(5, 79, 230, 81, 10);
@@ -73,8 +77,8 @@ class pro245View extends WatchUi.WatchFace {
         // dc.drawText(xcenter, ycenter+79, Graphics.FONT_SMALL, ActivityMonitor.getInfo().steps, Graphics.TEXT_JUSTIFY_CENTER);
         // dc.drawText(xcenter+87, ycenter+47, Graphics.FONT_SMALL, datetime.sec, Graphics.TEXT_JUSTIFY_CENTER);
         // dc.setPenWidth(3);
-        // dc.drawLine(0, 75, width, 75);
-        // dc.drawLine(0, 165, width, 165);
+        // dc.drawLine(0, 75, swidth, 75);
+        // dc.drawLine(0, 165, swidth, 165);
         // dc.drawLine(105, 39, 135, 39);
         // dc.drawRoundedRectangle(5, 79, 230, 81, 10);
 
@@ -84,6 +88,8 @@ class pro245View extends WatchUi.WatchFace {
         dc.setColor(0x00ffff, Graphics.COLOR_TRANSPARENT);
         dc.drawText(xcenter, ycenter-75, Graphics.FONT_SMALL, setBatteryLabel(), Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(xcenter, ycenter+52, Graphics.FONT_SMALL, setDateLabel(), Graphics.TEXT_JUSTIFY_CENTER);
+
+        // dc.drawText(xcenter-60, ycenter-75, Graphics.FONT_SMALL, datetime.sec, Graphics.TEXT_JUSTIFY_CENTER);
 
         // var info = ActivityMonitor.getInfo();
         // dc.drawText(60, 45, Graphics.FONT_SMALL, info.steps, Graphics.TEXT_JUSTIFY_CENTER);
@@ -128,7 +134,7 @@ class pro245View extends WatchUi.WatchFace {
 
     function setDateLabel() {
         // var datetime = Gregorian.info(Time.today(), Time.FORMAT_SHORT);
-        var str = datetime.month +"/"+ datetime.day +" 週"+ arrWeek[datetime.day_of_week];
+        var str = datetime.month +"/"+ datetime.day +" "+ arrWeek[datetime.day_of_week];
         // View.findDrawableById("DateLabel").setText(str);
         return str;
     }
